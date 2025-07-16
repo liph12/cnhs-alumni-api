@@ -29,7 +29,7 @@ class APIInterceptor extends APIController
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 
         if (!$apiKey || !isset($this->validKeys[$apiKey])) {
-            return $this->failResponse("Invalid API key.");
+            return $this->failResponse("Invalid API key. => $apiKey");
         }
 
         $allowedDomains = $this->validKeys[$apiKey];
