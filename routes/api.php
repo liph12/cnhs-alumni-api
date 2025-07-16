@@ -5,6 +5,6 @@ use App\Http\Controllers\APIs\MemberController;
 
 Route::prefix('v1')->group(function () {
 
-    Route::apiResource(MemberController::class);
-    
+    Route::apiResource(MemberController::class, 'members');
+
 });
