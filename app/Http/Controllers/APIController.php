@@ -14,7 +14,7 @@ abstract class APIController
         return response()->json(['data' => $data, 'message' => $message]);
     }
 
-    public function failResponse($status = 403, $message = "Something went wrong.")
+    public function failResponse($message = "Something went wrong.", $status = 403)
     {
         return response()->json(['message' => $message], $status);
     }

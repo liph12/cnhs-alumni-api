@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use App\Http\Controllers\APIController;
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class APIInterceptor extends APIController
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+
+    protected array $validKeys = [
+        'hvwHzEJoa7N3n7LJ4F9yIT41SbtkLdwV' => ['cnhsalumniassociation.ph']    
+    ];
+
+    public function handle(Request $request, Closure $next): Response
+    {
+        $apiKey = $request->header('X-API-KEY');
+        $origin = $request->header('Origin') ?? $request->header('Referer');
+
+        if (!$apiKey || !isset($this->validKeys[$apiKey])) {
+            return $this->failResponse("Invalid API key.");
+        }
+
+        $allowedDomains = $this->validKeys[$apiKey];
+
+        if ($origin) {
+            $host = parse_url($origin, PHP_URL_HOST);
+
+            if (!in_array($host, $allowedDomains)) {
+                return $this->failResponse("Domain not allowed.");
+            }
+        }
+
+        return $next($request);
+    }
+}
