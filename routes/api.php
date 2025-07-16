@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\APIs\MemberController;
 
-Route::get('/members', function (Request $request) {
-    return response()->json(['message' => "Success!!!!"]);
+Route::prefix('v1')->group(function () {
+
+    Route::apiResource(MemberController::class);
+    
 });

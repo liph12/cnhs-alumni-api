@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->date('birth_date')->nullable();
             $table->boolean('gender')->value(0);
+            $table->string('email')->nullable();
+            $table->string('mobile_number')->nullable();
+            $table->string('status', 50)->value('active');
             $table->integer('address_id')->nullable();
             $table->timestamps();
         });
