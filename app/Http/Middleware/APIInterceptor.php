@@ -21,7 +21,7 @@ class APIInterceptor extends APIController
 
     public function handle(Request $request, Closure $next): Response
     {
-        $apiKey = $request->header('X-API-KEY');
+        $apiKey = $request->query('api_key');
         $origin = $request->header('Origin') ?? $request->header('Referer');
 
         header("Access-Control-Allow-Origin: $origin");
