@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Member;
 use App\Services\MemberServiceInterface;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 
 class MemberService implements MemberServiceInterface
 {
@@ -26,12 +27,8 @@ class MemberService implements MemberServiceInterface
         return null;
     } 
 
-    public function allActive(): Member | null
+    public function allActive(): Collection
     {
-        DB::transaction(function(){
-            return $this->member->active()->get();
-        });
-
-        return null;
+        return $this->member->active()->get();
     }
 }

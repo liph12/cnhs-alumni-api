@@ -4,13 +4,13 @@ namespace App\Http\Controllers\APIs;
 
 use App\Http\Controllers\APIController;
 use App\Http\Resources\MemberAPI\MemberResource;
-use App\Services\MemberServiceInterface;
+use App\Services\MemberService;
 use App\Http\Requests\MemberRequest;
 use App\Http\Resources\MemberAPI\MemberResourceCollection;
 
 class MemberController extends APIController
 {
-    public function __construct(protected MemberServiceInterface $memberService) {}
+    public function __construct(protected MemberService $memberService) {}
 
     public function index()
     {
