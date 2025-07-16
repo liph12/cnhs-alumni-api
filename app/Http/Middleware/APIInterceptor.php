@@ -24,6 +24,10 @@ class APIInterceptor extends APIController
         $apiKey = $request->header('X-API-KEY');
         $origin = $request->header('Origin') ?? $request->header('Referer');
 
+        header("Access-Control-Allow-Origin: $origin");
+        header('Access-Control-Allow-Headers: Content-Type, X-API-KEY');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+
         if (!$apiKey || !isset($this->validKeys[$apiKey])) {
             return $this->failResponse("Invalid API key.");
         }
@@ -36,10 +40,6 @@ class APIInterceptor extends APIController
             if (!in_array($host, $allowedDomains)) {
                 return $this->failResponse("Domain not allowed.");
             }
-            
-            header("Access-Control-Allow-Origin: $origin");
-            header('Access-Control-Allow-Headers: Content-Type, X-API-KEY');
-            header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
         }
 
         return $next($request);
