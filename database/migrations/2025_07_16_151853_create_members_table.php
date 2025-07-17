@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('mobile_number')->nullable();
             $table->string('occupation')->nullable();
-            $table->string('experienceAfter')->nullable();
+            $table->string('experience_after')->nullable();
             $table->string('memories')->nullable();
             $table->string('status')->nullable();
             $table->bigInteger('address_id')->nullable();

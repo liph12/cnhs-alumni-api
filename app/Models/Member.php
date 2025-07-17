@@ -32,4 +32,9 @@ class Member extends Model
     {
         return $q->where('status', 'active');
     }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class, 'address_id');
+    }
 }
