@@ -18,6 +18,8 @@ class Member extends Model
         "address_id",
         "mobile_number",
         "occupation",
+        "experience_after",
+        "memories",
         "status"
     ];
 
