@@ -17,6 +17,7 @@ class Member extends Model
         "email",
         "address_id",
         "mobile_number",
+        "occupation",
         "status"
     ];
 
