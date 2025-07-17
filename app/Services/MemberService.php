@@ -21,15 +21,11 @@ class MemberService implements MemberServiceInterface
 
     public function createMember(array $data): Member | null
     {
-        DB::transaction(function() use($data){
-            $address = $this->address->create($data);
-            $data['address_id'] = $address->id;
-            $data['status'] = 'active';
+        $address = $this->address->create($data);
+        $data['address_id'] = $address->id;
+        $data['status'] = 'active';
 
-            return $this->member->create($data);
-        });
-
-        return null;
+        return $this->member->create($data);
     } 
 
     public function allActive(): Collection

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('mobile_number')->nullable();
             $table->string('status')->nullable();
-            $table->integer('address_id')->nullable();
+            $table->bigInteger('address_id')->nullable();
             $table->timestamps();
         });
     }
