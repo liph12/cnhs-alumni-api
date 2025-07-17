@@ -15,7 +15,8 @@ class Member extends Model
         "birth_date",
         "gender",
         "email",
-        "mobile_number"
+        "mobile_number",
+        "status"
     ];
 
     public function scopeCheckEmail($q, Builder $email): Builder
