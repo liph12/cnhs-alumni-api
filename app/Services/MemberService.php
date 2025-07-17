@@ -23,7 +23,6 @@ class MemberService implements MemberServiceInterface
     {
         DB::transaction(function() use($data){
             $address = $this->address->create($data);
-
             $data['address_id'] = $address->id;
             $data['status'] = 'active';
 
