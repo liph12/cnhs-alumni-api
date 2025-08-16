@@ -14,12 +14,16 @@ class MemberResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $fn = $this->first_name;
+        $ln = $this->last_name;
+        $slug = strtolower($fn)."_".strtolower($ln);
+
         return [
             "id" => $this->id,
             "batch_year" => $this->batch_year,
-            "first_name" => $this->first_name,
+            "first_name" => $fn,
             "middle_name" => $this->middle_name,
-            "last_name" => $this->last_name,
+            "last_name" => $ln,
             "birth_date" => $this->birth_date,
             "gender" => $this->gender,
             "email" => $this->email,
