@@ -32,7 +32,8 @@ class MemberResource extends JsonResource
             "experience_after" => $this->experience_after,
             "memories" => $this->memories,
             "status" => $this->status,
-            "address" => $this->address
+            "address" => $this->address,
+            "slug" => $slug
         ];
     }
 }
