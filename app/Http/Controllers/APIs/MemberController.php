@@ -61,12 +61,13 @@ class MemberController extends APIController
     public function loginAttempt(UserRequest $request)
     {
         $user = User::where('email', $request->email)->first();
-        $credentials = ['email' => $user->email, 'password' => $request->password];
 
         if(!$user)
         {
             return $this->failResponse("Invalid credentials.");
         }
+
+        $credentials = ['email' => $user->email, 'password' => $request->password];
 
         if(!Hash::check($credentials['password'], $user->password))
         {
