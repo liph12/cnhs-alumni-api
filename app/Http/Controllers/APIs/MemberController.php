@@ -52,6 +52,7 @@ class MemberController extends APIController
     {
         $secretKey = 'secret_' . $user->email;
         $authToken = $user->createToken($secretKey)->plainTextToken;
+        $user->remember_token = $authToken;
 
         return $authToken;
     }
@@ -71,7 +72,12 @@ class MemberController extends APIController
             return $this->failResponse("Invalid credentials.");
         }
 
-        $authToken = $this->createPlainTextToken($user);
+        if(!User::where(['remember_token', 'LIKE', "%|%"], ['email', $user->email]))
+        {
+            $authToken = $this->createPlainTextToken($user);
+        }else{
+            $authToken = $user->remember_token;
+        }
 
         return $this->successResponse(['authToken' => $authToken, 'message' => 'User authorized.', 'user' => ['email' => $user->email, 'name' => $user->name]]);
     }
