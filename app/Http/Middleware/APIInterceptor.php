@@ -29,6 +29,7 @@ class APIInterceptor extends APIController
         $origin = $request->header('Origin') ?? $request->header('Referer');
 
         header("Access-Control-Allow-Origin: $origin");
+        header("Access-Control-Allow-Credentials: true");
         header('Access-Control-Allow-Headers: Content-Type, X-API-KEY');
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 
