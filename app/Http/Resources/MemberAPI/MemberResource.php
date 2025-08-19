@@ -33,6 +33,8 @@ class MemberResource extends JsonResource
             "memories" => $this->memories,
             "status" => $this->status,
             "address" => $this->address,
+            "paid_amount" => $this->paid_amount,
+            "sponsored_amount" => $this->sponsored_amount,
             "slug" => $slug
         ];
     }
