@@ -31,6 +31,8 @@ class MemberController extends APIController
     {
         $member = $this->memberService->member->find($id);
         $member->status = $request->status;
+        $member->paid_amount = $request->amount_paid;
+        $member->sponsored_amount = $request->amount_sponsored;
         $member->save();
 
         return new MemberResource($member);
