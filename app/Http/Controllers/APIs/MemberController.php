@@ -43,7 +43,9 @@ class MemberController extends APIController
 
     public function authenticate()
     {
-        return $this->successResponse(['email' => auth()->user()->email], "User authenticated.");
+        $user = auth()->user();
+
+        return $this->successResponse(['email' => $user->email, 'name' => $user->name], "User authenticated.");
     }
 
     public function createPlainTextToken($user)
@@ -71,6 +73,6 @@ class MemberController extends APIController
 
         $authToken = $this->createPlainTextToken($user);
 
-        return $this->successResponse(['authToken' => $authToken, 'message' => 'User authorized.']);
+        return $this->successResponse(['authToken' => $authToken, 'message' => 'User authorized.', 'user' => ['email' => $user->email, 'name' => $user->name]]);
     }
 }
