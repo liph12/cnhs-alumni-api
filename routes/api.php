@@ -12,7 +12,7 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware(['auth:sanctum'])->group(function () {
 
-        Route::post('/authenticate', [MemberController::class, 'authenticate']);
+        Route::get('/authenticate', [MemberController::class, 'authenticate']);
 
         Route::apiResource('members', MemberController::class)->except('store');
         
