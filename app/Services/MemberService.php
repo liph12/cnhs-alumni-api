@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Member;
 use App\Models\Address;
 use App\Services\MemberServiceInterface;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 
 class MemberService implements MemberServiceInterface

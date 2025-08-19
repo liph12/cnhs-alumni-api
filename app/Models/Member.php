@@ -20,7 +20,9 @@ class Member extends Model
         "occupation",
         "experience_after",
         "memories",
-        "status"
+        "status",
+        "paid_amount",
+        "sponsored_amount"
     ];
 
     public function scopeCheckEmail($q, Builder $email): Builder
