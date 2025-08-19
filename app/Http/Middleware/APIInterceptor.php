@@ -27,12 +27,8 @@ class APIInterceptor extends APIController
     {
         $apiKey = $request->query('api_key');
         $origin = $request->header('Origin') ?? $request->header('Referer');
-
-        header("Access-Control-Allow-Origin: $origin");
-        header("Access-Control-Allow-Credentials: true");
-        header('Access-Control-Allow-Headers: Content-Type, X-API-KEY');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-
+    
+        // Preflight request (OPTIONS)
         if ($request->getMethod() === "OPTIONS") {
             return response('OK', 200)
                 ->header("Access-Control-Allow-Origin", $origin)
@@ -40,21 +36,38 @@ class APIInterceptor extends APIController
                 ->header("Access-Control-Allow-Headers", "Content-Type, X-API-KEY, Authorization")
                 ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         }
-
+    
+        // API key validation
         if (!$apiKey || !isset($this->validKeys[$apiKey])) {
-            return $this->failResponse("Invalid API key. => $apiKey");
+            return $this->failResponse("Invalid API key. => $apiKey")
+                ->header("Access-Control-Allow-Origin", $origin)
+                ->header("Access-Control-Allow-Credentials", "true")
+                ->header("Access-Control-Allow-Headers", "Content-Type, X-API-KEY, Authorization")
+                ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         }
-
+    
         $allowedDomains = $this->validKeys[$apiKey];
-
+    
         if ($origin) {
             $host = parse_url($origin, PHP_URL_HOST);
-
+    
             if (!in_array($host, $allowedDomains)) {
-                return $this->failResponse("Domain not allowed.");
+                return $this->failResponse("Domain not allowed.")
+                    ->header("Access-Control-Allow-Origin", $origin)
+                    ->header("Access-Control-Allow-Credentials", "true")
+                    ->header("Access-Control-Allow-Headers", "Content-Type, X-API-KEY, Authorization")
+                    ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             }
         }
-
-        return $next($request);
+    
+        // Normal request -> add CORS headers to response
+        $response = $next($request);
+    
+        return $response
+            ->header("Access-Control-Allow-Origin", $origin)
+            ->header("Access-Control-Allow-Credentials", "true")
+            ->header("Access-Control-Allow-Headers", "Content-Type, X-API-KEY, Authorization")
+            ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     }
+    
 }
