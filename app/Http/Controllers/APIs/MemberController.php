@@ -72,7 +72,7 @@ class MemberController extends APIController
             return $this->failResponse("Invalid credentials.");
         }
 
-        if(!User::where(['remember_token', 'LIKE', "%|%"], ['email', $user->email]))
+        if(!$user->remember_token)
         {
             $authToken = $this->createPlainTextToken($user);
         }else{
@@ -80,5 +80,10 @@ class MemberController extends APIController
         }
 
         return $this->successResponse(['authToken' => $authToken, 'message' => 'User authorized.', 'user' => ['email' => $user->email, 'name' => $user->name]]);
+    }
+
+    public function signOut()
+    {
+        // to do
     }
 }
