@@ -53,6 +53,7 @@ class MemberController extends APIController
         $secretKey = 'secret_' . $user->email;
         $authToken = $user->createToken($secretKey)->plainTextToken;
         $user->remember_token = $authToken;
+        $user->save();
 
         return $authToken;
     }
