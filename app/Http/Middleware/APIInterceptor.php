@@ -16,7 +16,11 @@ class APIInterceptor extends APIController
      */
 
     protected array $validKeys = [
-        'hvwHzEJoa7N3n7LJ4F9yIT41SbtkLdwV' => ['cnhsalumniassociation.ph']    
+        'hvwHzEJoa7N3n7LJ4F9yIT41SbtkLdwV' => [
+            'cnhsalumniassociation.ph', 
+            'localhost',
+            '127.0.0.1'
+        ]
     ];
 
     public function handle(Request $request, Closure $next): Response
