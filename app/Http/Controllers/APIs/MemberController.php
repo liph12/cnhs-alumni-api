@@ -7,6 +7,7 @@ use App\Http\Resources\MemberAPI\MemberResource;
 use App\Services\MemberService;
 use App\Http\Requests\MemberRequest;
 use App\Http\Resources\MemberAPI\MemberResourceCollection;
+use Illuminate\Http\Request;
 
 class MemberController extends APIController
 {
@@ -22,6 +23,15 @@ class MemberController extends APIController
     public function store(MemberRequest $request)
     {
         $member = $this->memberService->createMember($request->all());
+
+        return new MemberResource($member);
+    }
+
+    public function update($id, Request $request)
+    {
+        $member = $this->memberService->member->find($id);
+        $member->status = $request->status;
+        $member->save();
 
         return new MemberResource($member);
     }
