@@ -30,6 +30,6 @@ class MemberService implements MemberServiceInterface
 
     public function allActive(): Collection
     {
-        return $this->member->active()->get();
+        return $this->member->get();
     }
 }
