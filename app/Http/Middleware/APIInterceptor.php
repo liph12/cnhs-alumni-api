@@ -33,6 +33,14 @@ class APIInterceptor extends APIController
         header('Access-Control-Allow-Headers: Content-Type, X-API-KEY');
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 
+        if ($request->getMethod() === "OPTIONS") {
+            return response('OK', 200)
+                ->header("Access-Control-Allow-Origin", $origin)
+                ->header("Access-Control-Allow-Credentials", "true")
+                ->header("Access-Control-Allow-Headers", "Content-Type, X-API-KEY, Authorization")
+                ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        }
+
         if (!$apiKey || !isset($this->validKeys[$apiKey])) {
             return $this->failResponse("Invalid API key. => $apiKey");
         }
