@@ -33,9 +33,18 @@ class MemberController extends APIController
     public function update($id, Request $request)
     {
         $member = $this->memberService->member->find($id);
+        $logData = [
+            'user' => auth()->user()->email,
+            'value' => $request->status,
+            'updated_at' => date('Y-m-d H:i:s')
+        ];        
+        $currLogs = $member->update_cur ?? [];
+        $currLogs[] = $logData;
+
         $member->status = $request->status;
         $member->paid_amount = $request->amount_paid;
         $member->sponsored_amount = $request->amount_sponsored;
+        $member->update_logs = $currLogs;
         $member->save();
 
         return new MemberResource($member);
