@@ -38,7 +38,7 @@ class MemberController extends APIController
             'value' => $request->status,
             'updated_at' => date('Y-m-d H:i:s')
         ];        
-        $currLogs = $member->update_cur ?? [];
+        $currLogs = $member->update_logs ?? [];
         $currLogs[] = $logData;
 
         $member->status = $request->status;
