@@ -22,7 +22,12 @@ class Member extends Model
         "memories",
         "status",
         "paid_amount",
-        "sponsored_amount"
+        "sponsored_amount",
+        "update_logs"
+    ];
+
+    protected $casts = [
+        'update_logs' => 'object',
     ];
 
     public function scopeCheckEmail($q, Builder $email): Builder
