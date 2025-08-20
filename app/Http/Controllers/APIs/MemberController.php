@@ -35,7 +35,11 @@ class MemberController extends APIController
         $member = $this->memberService->member->find($id);
         $logData = [
             'user' => auth()->user()->email,
-            'value' => $request->status,
+            'values' => [
+                'status' => $request->status,
+                'paid_amount' => $request->amount_paid,
+                'sponsored_amount' => $request->amount_sponsored
+            ],
             'updated_at' => date('Y-m-d H:i:s')
         ];        
         $currLogs = $member->update_logs ?? [];
