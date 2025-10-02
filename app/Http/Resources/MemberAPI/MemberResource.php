@@ -16,11 +16,12 @@ class MemberResource extends JsonResource
     {
         $fn = $this->first_name;
         $ln = $this->last_name;
-        $slug = strtolower($fn)."_".strtolower($ln);
+        $slug = strtolower($fn) . "_" . strtolower($ln);
 
         return [
             "id" => $this->id,
             "batch_year" => $this->batch_year,
+            "name" => "$fn $ln",
             "first_name" => $fn,
             "middle_name" => $this->middle_name,
             "last_name" => $ln,
