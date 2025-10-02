@@ -43,6 +43,7 @@ class MemberController extends APIController
 
             if (isset($request->on_capture)) {
                 $member->captured_at = date("Y-m-d H:i:s");
+                $member->save();
             }
 
             $results = $this->memberService->member->where([
