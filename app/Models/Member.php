@@ -24,7 +24,8 @@ class Member extends Model
         "paid_amount",
         "sponsored_amount",
         "update_logs",
-        "captured_at"
+        "captured_at",
+        "captured_at_timestamp"
     ];
 
     protected $casts = [

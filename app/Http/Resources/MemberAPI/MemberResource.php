@@ -37,7 +37,7 @@ class MemberResource extends JsonResource
             "paid_amount" => $this->paid_amount,
             "sponsored_amount" => $this->sponsored_amount,
             "update_logs" => $this->update_logs,
-            "captured_at_formatted" => isset($this->captured_at) ? date("M d, Y h:i A", strtotime($this->captured_at)) : null,
+            "captured_at_timestamp" => isset($this->captured_at_timestamp) ? date("M d, Y h:i A", strtotime($this->captured_at_timestamp)) : null,
             "captured_at" => $this->captured_at,
             "slug" => $slug
         ];
