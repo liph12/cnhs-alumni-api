@@ -37,6 +37,7 @@ class MemberResource extends JsonResource
             "paid_amount" => $this->paid_amount,
             "sponsored_amount" => $this->sponsored_amount,
             "update_logs" => $this->update_logs,
+            "captured_at" => $this->captured_at,
             "slug" => $slug
         ];
     }

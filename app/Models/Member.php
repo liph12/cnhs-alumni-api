@@ -23,7 +23,8 @@ class Member extends Model
         "status",
         "paid_amount",
         "sponsored_amount",
-        "update_logs"
+        "update_logs",
+        "captured_at"
     ];
 
     protected $casts = [

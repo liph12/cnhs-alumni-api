@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Hash;
 
 class MemberController extends APIController
 {
-    public function __construct(protected MemberService $memberService) {}
+    public function __construct(protected MemberService $memberService)
+    {
+        date_default_timezone_set('Asia/Manila');
+    }
 
     public function index()
     {
@@ -30,13 +33,17 @@ class MemberController extends APIController
         return new MemberResource($member);
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
         $member = $this->memberService->member->find($id);
 
         if ($member) {
             $fn = $member->first_name;
             $ln = $member->last_name;
+
+            if (isset($request->on_capture)) {
+                $member->captured_at = date("Y-m-d H:i:s");
+            }
 
             $results = $this->memberService->member->where([
                 ['first_name', 'LIKE', "%$fn%"],
