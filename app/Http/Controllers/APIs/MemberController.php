@@ -42,7 +42,7 @@ class MemberController extends APIController
             $ln = $member->last_name;
 
             if (isset($request->on_capture)) {
-                $member->captured_at = date("Y-m-d H:i:s");
+                $member->captured_at = date("Y-m-d h:i:s");
                 $member->save();
             }
 
