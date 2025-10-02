@@ -79,6 +79,7 @@ class MemberController extends APIController
         $member->paid_amount = $request->amount_paid;
         $member->sponsored_amount = $request->amount_sponsored;
         $member->update_logs = $currLogs;
+        $member->captured_at = $request->captured_at;
         $member->save();
 
         return new MemberResource($member);
