@@ -41,10 +41,13 @@ class MemberController extends APIController
                 'sponsored_amount' => $request->amount_sponsored
             ],
             'updated_at' => date('Y-m-d H:i:s')
-        ];        
+        ];
         $currLogs = $member->update_logs ?? [];
         $currLogs[] = $logData;
 
+        $member->first_name = $request->first_name;
+        $member->last_name = $request->last_name;
+        $member->batch_year = $request->batch_year;
         $member->status = $request->status;
         $member->paid_amount = $request->amount_paid;
         $member->sponsored_amount = $request->amount_sponsored;
@@ -75,22 +78,19 @@ class MemberController extends APIController
     {
         $user = User::where('email', $request->email)->first();
 
-        if(!$user)
-        {
+        if (!$user) {
             return $this->failResponse("Invalid credentials.");
         }
 
         $credentials = ['email' => $user->email, 'password' => $request->password];
 
-        if(!Hash::check($credentials['password'], $user->password))
-        {
+        if (!Hash::check($credentials['password'], $user->password)) {
             return $this->failResponse("Invalid credentials.");
         }
 
-        if(!$user->remember_token)
-        {
+        if (!$user->remember_token) {
             $authToken = $this->createPlainTextToken($user);
-        }else{
+        } else {
             $authToken = $user->remember_token;
         }
 
