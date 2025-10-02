@@ -30,6 +30,22 @@ class MemberController extends APIController
         return new MemberResource($member);
     }
 
+    public function show($id)
+    {
+        $member = $this->memberService->member->find($id);
+        $fn = $member->first_name;
+        $ln = $member->last_name;
+        $by = $member->batch_year;
+
+        $results = $this->memberService->member->where([
+            ['first_name', 'LIKE', "%$fn%"],
+            ['last_name', 'LIKE', "%$ln%"],
+            ['batch_year', 'LIKE', "%$by%"]
+        ])->get();
+
+        return new MemberResourceCollection($results);
+    }
+
     public function update($id, Request $request)
     {
         $member = $this->memberService->member->find($id);
