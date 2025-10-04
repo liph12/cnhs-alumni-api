@@ -43,7 +43,7 @@ class MemberController extends APIController
 
             if (isset($request->on_capture)) {
                 if ($member->captured_at_timestamp == null) {
-                    $member->captured_at_timestamp = date("Y-m-d h:i:s");
+                    $member->captured_at_timestamp = date("Y-m-d H:i:s");
                     $member->captured_at = date("Y-m-d");
                     $member->save();
                 }
