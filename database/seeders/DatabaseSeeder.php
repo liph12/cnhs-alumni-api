@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Member;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,19 +38,21 @@ class DatabaseSeeder extends Seeder
         //     ],
         // ];
 
-        $users = [
-            [
-                'name' => 'Lester Managbanag',
-                'email' => 'lesterbesira.managbanag@gmail.com'
-            ]
-        ];
+        // $users = [
+        //     [
+        //         'name' => 'Lester Managbanag',
+        //         'email' => 'lesterbesira.managbanag@gmail.com'
+        //     ]
+        // ];
 
-        foreach($users as $user)
-        {
-            $password = Hash::make('assocadmin#2025');
-            $user['password'] = $password;
+        // foreach($users as $user)
+        // {
+        //     $password = Hash::make('assocadmin#2025');
+        //     $user['password'] = $password;
 
-            User::create($user);
-        }
+        //     User::create($user);
+        // }
+
+        Member::whereNotNull('captured_at_timestamp')->update(['captured_at_timestamp' => null]);
     }
 }

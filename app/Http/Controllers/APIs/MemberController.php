@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Member;
 
 class MemberController extends APIController
 {
@@ -131,5 +132,10 @@ class MemberController extends APIController
     public function signOut()
     {
         // to do
+    }
+
+    public function updateCapturedAtNull()
+    {
+        Member::whereNotNull('captured_at_timestamp')->update(['captured_at_timestamp' => null]);
     }
 }
