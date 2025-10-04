@@ -39,7 +39,7 @@ class MemberResource extends JsonResource
             "update_logs" => $this->update_logs,
             "captured_at_timestamp" => isset($this->captured_at_timestamp) ? date("M d, Y h:i A", strtotime($this->captured_at_timestamp)) : null,
             "captured_at" => $this->captured_at,
-            "captured_status" => isset($this->captured_at_timestamp) ? (strtotime($this->captured_at_timestamp . " +30 seconds") > time() ? "valid" : "invalid") : "pending",
+            "captured_status" => isset($this->captured_at_timestamp) ? "valid" : "invalid") : "pending",
             "slug" => $slug
         ];
     }
